@@ -1,9 +1,10 @@
 import React from 'react';
 import './index.css';
 
-const ImageResults = ({ images }) => {
+const ImageResults = ({ images ,query}) => {
   return (
     <div className="image-results">
+      <h1 className='image-query'>{query}</h1>
       {images.map((image) => (
         <div key={image.id} className="image-item">
           <img src={image.urls.small} alt={image.description} className="image" />

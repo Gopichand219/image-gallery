@@ -28,3 +28,26 @@
   align-items: center;
   height: 100vh;
 }
+
+.recent-searches {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.recent-search-item {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  color: #007bff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.recent-search-item:hover {
+  background-color: #e2e6ea;
+}

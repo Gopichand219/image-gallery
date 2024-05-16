@@ -9,6 +9,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
+  const [recentSearches, setRecentSearches] = useState([]);
 
   const searchImages = async (query, page = 1) => {
     setLoading(true);
@@ -16,15 +17,18 @@ function App() {
     const response = await fetch(
       `https://api.unsplash.com/search/photos?page=${page}&query=${query}&client_id=gABcXRms_G7ypQTyzC7SpLxL-yGSH9qvCHJJaB70dvY`
     );
-    console.log(`https://api.unsplash.com/search/photos?page=${page}&query=${query}&client_id=gABcXRms_G7ypQTyzC7SpLxL-yGSH9qvCHJJaB70dvY`)
     const data = await response.json();
-    console.log(data.results);
     if (page === 1) {
       setImages(data.results);
     } else {
       setImages((prevImages) => [...prevImages, ...data.results]);
     }
     setLoading(false);
+
+    setRecentSearches((prevSearches) => {
+      const newSearches = [query, ...prevSearches.filter((item) => item !== query)];
+      return newSearches.slice(0, 4);
+    });
   };
 
   const loadMoreImages = () => {
@@ -33,16 +37,32 @@ function App() {
     searchImages(query, nextPage);
   };
 
+  const handleRecentSearchClick = (query) => {
+    setPage(1);
+    searchImages(query);
+  };
+
   return (
     <div className="App">
       <h1>Image Search App</h1>
       <ImageSearch searchImages={searchImages} />
+      <div className="recent-searches">
+        {recentSearches.map((search, index) => (
+          <span
+            key={index}
+            onClick={() => handleRecentSearchClick(search)}
+            className="recent-search-item"
+          >
+            {search}
+          </span>
+        ))}
+      </div>
       {loading ? (
         <div className="loader">
           <ClipLoader size={150} color={"#007bff"} loading={loading} />
         </div>
       ) : (
-        <ImageResults images={images} />
+        <ImageResults images={images} query={query}/>
       )}
       {images.length > 0 && !loading && (
         <button onClick={loadMoreImages} className="load-more-button">Load More</button>

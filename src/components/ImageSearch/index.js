@@ -9,6 +9,7 @@ const ImageSearch = ({ searchImages }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     searchImages(query);
+    setQuery('');
   };
 
   return (

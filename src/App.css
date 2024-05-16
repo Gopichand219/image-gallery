@@ -51,3 +51,10 @@
 .recent-search-item:hover {
   background-color: #e2e6ea;
 }
+
+.riseup-icon{
+  max-height: 200px;
+  height: 100px;
+  max-width: 600px;
+  width: 300px;
+}

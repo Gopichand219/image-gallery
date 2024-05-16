@@ -3,6 +3,7 @@ import './App.css';
 import ImageResults from './components/ImageResults';
 import ImageSearch from './components/ImageSearch';
 import { ClipLoader } from 'react-spinners';
+import riseupIcon from './assets/riseup-icon.png';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -44,7 +45,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Image Search App</h1>
+      <img src={riseupIcon} alt='Rise Up Icon' className='riseup-icon'/>
       <ImageSearch searchImages={searchImages} />
       <div className="recent-searches">
         {recentSearches.map((search, index) => (
